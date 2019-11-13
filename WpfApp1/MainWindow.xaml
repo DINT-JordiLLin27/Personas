@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:SexoAImagenConverter x:Key="conversor"></local:SexoAImagenConverter>
+        <DataTemplate DataType="{x:Type local:Persona}">
+            <StackPanel Orientation="Horizontal">
+                <Ellipse Width="30" Height="30">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Foto}"></ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <TextBlock Margin="10,0,0,0" FontSize="20">
+                    <Bold>
+                        <Run Text="{Binding Nombre}"/>
+                    </Bold>
+                </TextBlock>
+                <Image Margin="10,0,0,0" Source="{Binding Sexo, Converter={StaticResource conversor}}"></Image>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel Width="500">
+        <ComboBox x:Name="ContenedorComboBox" Margin="50" ItemsSource="{Binding}" SelectionChanged="ContenedorComboBox_SelectionChanged" SelectedValuePath="Id"></ComboBox>
+        <TextBlock x:Name="IdentificadorTextBlock" Text="El identificador del elemento seleccionado es: "/>
+    </StackPanel>
+</Window>
